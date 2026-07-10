@@ -76,16 +76,13 @@ Sistem Informasi Rental PlayStation berbasis **Laravel** yang dikembangkan sebag
 
 ---
 
-## 🚀 Cara Menjalankan Project
+## 🚀 Cara Menjalankan Project di local host
 
 ```bash
-git clone https://github.com/fitriyanto001/rental-ps.git
-cd rental-ps
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate
-php artisan serve
+jalankan php di laragon
+buka terminal jalankan 'cd rental-ps' diterminal laragon\www untuk mengakses folder laravelnya
+jalankan 'php artisan serve' untuk menjalankan servernya
+buka di web ketik http://127.0.0.1:8000/ maka akan masuk ke menu login
 ```
 
 ---
