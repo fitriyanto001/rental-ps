@@ -344,6 +344,24 @@
             letter-spacing: 0.5px;
         }
 
+        /* Qty kantin input: tampilkan angka dengan benar */
+        .qty-kantin {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 1px;
+            height: 1px;
+        }
+        .qty-display {
+            display: inline-block;
+            min-width: 28px;
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
         /* Print formatting */
         #nota-print-area { display: none; }
 
@@ -760,7 +778,8 @@
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
                                         <button type="button" class="btn btn-sm btn-outline-secondary px-2 text-white border-secondary border-opacity-40" onclick="decQty('{{ $console->id }}', '{{ $menu->id }}')" {{ ($menu->stok <= 0 || $menu->status == 'Habis') ? 'disabled' : '' }}>-</button>
-                                        <input type="number" name="food[{{ $menu->id }}]" id="qty_{{ $console->id }}_{{ $menu->id }}" class="form-control form-control-sm text-center bg-transparent border-0 text-white fw-bold qty-input-{{ $console->id }}" value="0" min="0" max="{{ $menu->stok }}" readonly style="width: 32px;" data-harga="{{ $menu->harga }}" data-nama="{{ $menu->nama_menu }}">
+                                        <input type="number" name="food[{{ $menu->id }}]" id="qty_{{ $console->id }}_{{ $menu->id }}" class="qty-kantin qty-input-{{ $console->id }}" value="0" min="0" max="{{ $menu->stok }}" data-harga="{{ $menu->harga }}" data-nama="{{ $menu->nama_menu }}">
+                                        <span id="qty_display_{{ $console->id }}_{{ $menu->id }}" class="qty-display">0</span>
                                         <button type="button" class="btn btn-sm btn-outline-secondary px-2 text-white border-secondary border-opacity-40" id="btn_add_{{ $console->id }}_{{ $menu->id }}" onclick="incQty('{{ $console->id }}', '{{ $menu->id }}', {{ $menu->stok }})" {{ ($menu->stok <= 0 || $menu->status == 'Habis') ? 'disabled' : '' }}>+</button>
                                     </div>
                                 </div>
@@ -895,67 +914,25 @@
         filterPSModern(activeBtn, kriteria);
     }
 
-    // LOGIKA PERHITUNGAN CHECKOUT & NOTA PRINT
-    function hitungCheckout(id, createdAtStr, durationHours, renterName, consoleName) {
-        if (!createdAtStr) return;
-
-        let startTime = moment(createdAtStr);
-        let now = moment();
-        
-        let jamMulaiStr = startTime.format('HH:mm') + " WIB";
-        document.getElementById(`txtMulai${id}`).innerText = jamMulaiStr;
-
-        let diffMins = now.diff(startTime, 'minutes');
-        if (diffMins < 0) diffMins = 0;
-
-        let jamNyata = Math.floor(diffMins / 60);
-        let sisaMenit = diffMins % 60;
-        
-        if(sisaMenit > 5) jamNyata += 1;
-        if(jamNyata === 0) jamNyata = 1;
-
-        document.getElementById(`txtDurasiNyata${id}`).innerText = `${Math.floor(diffMins/60)} Jam ${sisaMenit} Menit (Dibulatkan jadi ${jamNyata} Jam)`;
-
-        function rumusTarif(jam) {
-            if (jam <= 1) return 8000;
-            if (jam == 2) return 15000;
-            return 15000 + ((jam - 2) * 5000);
-        }
-
-        let biayaSkenA = rumusTarif(parseInt(durationHours));
-        let biayaSkenB = rumusTarif(jamNyata);
-
-        if (parseInt(durationHours) === 0) biayaSkenA = biayaSkenB;
-
-        dataBiayaSewa[id] = { skenA: biayaSkenA, skenB: biayaSkenB };
-
-        infoNotaTerpilih = {
-            id: id, namaPelanggan: renterName, namaPS: consoleName,
-            jamMulai: jamMulaiStr, durasiCetak: `${jamNyata} Jam`,
-            durasiAsliText: `${Math.floor(diffMins/60)}j ${sisaMenit}m`
-        };
-
-        document.getElementById(`hargaSkenA${id}`).innerText = "Rp " + biayaSkenA.toLocaleString('id-ID');
-        document.getElementById(`hargaSkenB${id}`).innerText = "Rp " + biayaSkenB.toLocaleString('id-ID');
-
-        hitungTotalAkhir(id);
-    }
-
     // 3. FITUR TAMBAH / KURANG QUANTITY KANTIN
     function incQty(consoleId, menuId, maxStock) {
         let input = document.getElementById(`qty_${consoleId}_${menuId}`);
+        let display = document.getElementById(`qty_display_${consoleId}_${menuId}`);
         let currentVal = parseInt(input.value) || 0;
         if (currentVal < maxStock) {
             input.value = currentVal + 1;
+            if (display) display.innerText = currentVal + 1;
             hitungTotalAkhir(consoleId);
         }
     }
 
     function decQty(consoleId, menuId) {
         let input = document.getElementById(`qty_${consoleId}_${menuId}`);
+        let display = document.getElementById(`qty_display_${consoleId}_${menuId}`);
         let currentVal = parseInt(input.value) || 0;
         if (currentVal > 0) {
             input.value = currentVal - 1;
+            if (display) display.innerText = currentVal - 1;
             hitungTotalAkhir(consoleId);
         }
     }
