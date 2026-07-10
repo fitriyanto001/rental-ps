@@ -56,6 +56,18 @@ Sistem Informasi Rental PlayStation berbasis **Laravel** yang dikembangkan sebag
 
 ---
 
+## 📸 Tampilan Sistem
+
+### Dashboard
+
+![Dashboard](images/dashboard.png)
+
+### Checkout
+
+![Checkout](images/checkout.png)
+
+---
+
 ## 🌐 Live Demo
 
 🔗 https://rentalps.infinityfreeapp.com/login
