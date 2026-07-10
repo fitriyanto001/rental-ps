@@ -92,13 +92,10 @@ https://rentalps.infinityfreeapp.com
 ```
 admin@ajisps.com
 ```
-
-**Password**
+**password**
 ```
-password
 admin123
-
----
+```
 
 ---
 
