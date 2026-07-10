@@ -40,26 +40,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Login instan sebagai tamu / dosen.
-     */
-    public function loginGuest(Request $request)
-    {
-        $guestUser = \App\Models\User::firstOrCreate(
-            ['email' => 'tamu@ajisps.com'],
-            [
-                'name'     => 'Dosen Penilai / Tamu',
-                'password' => \Illuminate\Support\Facades\Hash::make('tamu123'),
-            ]
-        );
-
-        Auth::login($guestUser);
-        $request->session()->regenerate();
-
-        return redirect()->intended('/dashboard')
-            ->with('toast_success', 'Selamat datang! Anda masuk sebagai Tamu / Dosen Penilai.');
-    }
-
-    /**
      * Proses logout.
      */
     public function logout(Request $request)

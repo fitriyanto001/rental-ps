@@ -193,13 +193,6 @@
                 <span>MASUK SISTEM</span> <i class="bi bi-arrow-right-short fs-4"></i>
             </button>
         </form>
-
-        <form action="{{ route('login.guest') }}" method="POST" id="guest-login-form">
-            @csrf
-            <button type="submit" class="btn btn-outline-info w-100 d-flex align-items-center justify-content-center gap-2" style="border-radius:12px; padding:13px; font-weight:600;">
-                <i class="bi bi-person-badge-fill"></i> MASUK SEBAGAI DOSEN/PENILAI
-            </button>
-        </form>
     </div>
 </div>
 
