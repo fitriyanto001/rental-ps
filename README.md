@@ -67,13 +67,6 @@ Sistem Informasi Rental PlayStation berbasis **Laravel** yang dikembangkan sebag
 
 <img width="1362" height="640" alt="image" src="https://github.com/user-attachments/assets/c557e314-fc0f-4b08-ac44-b72853b304bd" />
 
-
----
-
-## 🌐 Live Demo
-
-🔗 https://rentalps.infinityfreeapp.com/login
-
 ---
 
 ## 🚀 Cara Menjalankan Project di local host
@@ -110,6 +103,7 @@ admin123
 ## 👨‍💻 Pengembang
 
 **Fitriyanto**
+**2410010008**
 
 Universitas Islam Kalimantan Muhammad Arsyad Al Banjari
 
