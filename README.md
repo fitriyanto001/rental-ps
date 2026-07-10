@@ -60,11 +60,13 @@ Sistem Informasi Rental PlayStation berbasis **Laravel** yang dikembangkan sebag
 
 ### Dashboard
 
-![Dashboard](images/dashboard.png)
+<img width="1366" height="640" alt="image" src="https://github.com/user-attachments/assets/290ee120-d6e4-4ebf-97a5-a776a36d1c54" />
+
 
 ### Checkout
 
-![Checkout](images/checkout.png)
+<img width="1362" height="640" alt="image" src="https://github.com/user-attachments/assets/c557e314-fc0f-4b08-ac44-b72853b304bd" />
+
 
 ---
 
