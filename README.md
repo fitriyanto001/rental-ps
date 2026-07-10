@@ -87,6 +87,26 @@ buka di web ketik http://127.0.0.1:8000/ maka akan masuk ke menu login
 
 ---
 
+## 🌐 Live Demo
+
+Aplikasi dapat diakses melalui:
+
+https://rentalps.infinityfreeapp.com
+
+### Demo Login
+
+**Email**
+```
+admin@ajisps.com
+```
+
+**Password**
+```
+password
+admin123
+
+---
+
 ## 👨‍💻 Pengembang
 
 **Fitriyanto**
