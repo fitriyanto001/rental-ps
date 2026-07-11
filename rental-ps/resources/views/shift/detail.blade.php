@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <style>
         :root { --bg-primary:#090d16; --bg-surface:#131926; --bg-card:rgba(26,33,50,0.65); --border-glow:rgba(255,255,255,0.08); --color-aktif:#3b82f6; }
         body { font-family: 'Plus Jakarta Sans', sans-serif !important; background-color: var(--bg-primary); color: #f1f5f9; min-height: 100vh; }
@@ -36,12 +37,31 @@
     </style>
 </head>
 <body>
+
+<script>
+    (function() {
+        const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+        if (isCollapsed) {
+            document.body.classList.add('sidebar-collapsed');
+        }
+    })();
+    function toggleSidebar() {
+        document.body.classList.toggle('sidebar-collapsed');
+        const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+        localStorage.setItem('sidebarCollapsed', isCollapsed ? 'true' : 'false');
+    }
+</script>
+
 <div class="ambient-bg"></div>
 
 <div class="container-fluid">
 <div class="row">
     <!-- SIDEBAR -->
     <div class="col-md-2 p-0 sidebar d-flex flex-column justify-content-between p-4 text-white">
+        <button class="sidebar-toggle-btn no-print" onclick="toggleSidebar()" title="Toggle Sidebar">
+            <i class="bi bi-chevron-left icon-close"></i>
+            <i class="bi bi-chevron-right icon-open"></i>
+        </button>
         <div>
             <div class="brand-container text-center my-3">
                 <h4 class="fw-extrabold text-primary mb-1" style="letter-spacing:1.5px;">AJIS-PS</h4>
@@ -72,13 +92,15 @@
 
         <!-- HEADER -->
         <div class="d-flex justify-content-between align-items-center mb-4 gap-3 p-3 glass-panel no-print">
-            <div>
-                <h5 class="m-0 fw-bold text-white d-flex align-items-center gap-2">
-                    <span>📄</span> DETAIL SHIFT — {{ $shift->kasir_name }}
-                </h5>
-                <small class="text-muted">{{ $shift->jam_buka->format('d M Y, H:i') }} WIB
-                    @if($shift->jam_tutup) → {{ $shift->jam_tutup->format('H:i') }} WIB @endif
-                </small>
+            <div class="d-flex align-items-center gap-3">
+                <div>
+                    <h5 class="m-0 fw-bold text-white d-flex align-items-center gap-2">
+                        <span>📄</span> DETAIL SHIFT — {{ $shift->kasir_name }}
+                    </h5>
+                    <small class="text-muted">{{ $shift->jam_buka->format('d M Y, H:i') }} WIB
+                        @if($shift->jam_tutup) &rarr; {{ $shift->jam_tutup->format('H:i') }} WIB @endif
+                    </small>
+                </div>
             </div>
             <div class="d-flex gap-2">
                 <a href="{{ route('shift.riwayat') }}" class="btn btn-outline-secondary px-3 py-2 rounded-3 d-flex align-items-center gap-2 no-print">

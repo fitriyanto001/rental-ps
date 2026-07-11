@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <style>
         :root { --bg-primary:#090d16; --bg-surface:#131926; --bg-card:rgba(26,33,50,0.65); --border-glow:rgba(255,255,255,0.08); --color-aktif:#3b82f6; }
         body { font-family: 'Plus Jakarta Sans', sans-serif !important; background-color: var(--bg-primary); color: #f1f5f9; min-height: 100vh; }
@@ -33,12 +34,31 @@
     </style>
 </head>
 <body>
+
+<script>
+    (function() {
+        const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+        if (isCollapsed) {
+            document.body.classList.add('sidebar-collapsed');
+        }
+    })();
+    function toggleSidebar() {
+        document.body.classList.toggle('sidebar-collapsed');
+        const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+        localStorage.setItem('sidebarCollapsed', isCollapsed ? 'true' : 'false');
+    }
+</script>
+
 <div class="ambient-bg"></div>
 
 <div class="container-fluid">
 <div class="row">
     <!-- SIDEBAR -->
     <div class="col-md-2 p-0 sidebar d-flex flex-column justify-content-between p-4 text-white">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()" title="Toggle Sidebar">
+            <i class="bi bi-chevron-left icon-close"></i>
+            <i class="bi bi-chevron-right icon-open"></i>
+        </button>
         <div>
             <div class="brand-container text-center my-3">
                 <h4 class="fw-extrabold text-primary mb-1" style="letter-spacing:1.5px;">AJIS-PS</h4>
@@ -67,9 +87,11 @@
     <!-- WORKSPACE -->
     <div class="col-md-10 p-4 min-vh-100 d-flex flex-column">
         <div class="d-flex justify-content-between align-items-center mb-4 gap-3 p-3 glass-panel">
-            <div>
-                <h5 class="m-0 fw-bold text-white d-flex align-items-center gap-2"><span>📋</span> RIWAYAT SHIFT KASIR</h5>
-                <small class="text-muted">Arsip semua shift yang pernah berjalan beserta rekap pendapatan</small>
+            <div class="d-flex align-items-center gap-3">
+                <div>
+                    <h5 class="m-0 fw-bold text-white d-flex align-items-center gap-2"><span>📋</span> RIWAYAT SHIFT KASIR</h5>
+                    <small class="text-muted">Arsip semua shift yang pernah berjalan beserta rekap pendapatan</small>
+                </div>
             </div>
             <a href="{{ route('shift.index') }}" class="btn btn-primary px-4 py-2 rounded-3 fw-semibold d-flex align-items-center gap-2">
                 <i class="bi bi-calendar-check"></i> Shift Aktif

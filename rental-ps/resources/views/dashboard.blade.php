@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <style>
         :root {
             --bg-primary: #090d16;
@@ -118,17 +119,19 @@
 
         /* Widget Cards */
         .widget-card {
+            position: relative;
+            overflow: hidden;
             border-radius: 14px;
-            padding: 20px;
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .widget-card:hover {
             transform: translateY(-3px);
-            background: rgba(30, 41, 59, 0.5);
-            border-color: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #24334a 0%, #121c30 100%);
+            border-color: rgba(255, 255, 255, 0.12);
         }
 
         /* Modernized filter buttons */
@@ -386,6 +389,20 @@
 </head>
 <body>
 
+<script>
+    (function() {
+        const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+        if (isCollapsed) {
+            document.body.classList.add('sidebar-collapsed');
+        }
+    })();
+    function toggleSidebar() {
+        document.body.classList.toggle('sidebar-collapsed');
+        const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+        localStorage.setItem('sidebarCollapsed', isCollapsed ? 'true' : 'false');
+    }
+</script>
+
 <div class="ambient-bg"></div>
 <div class="ambient-bg-2"></div>
 
@@ -394,6 +411,10 @@
         
         <!-- SIDEBAR MENU -->
         <div class="col-md-2 p-0 sidebar d-flex flex-column justify-content-between p-4 text-white">
+            <button class="sidebar-toggle-btn" onclick="toggleSidebar()" title="Toggle Sidebar">
+                <i class="bi bi-chevron-left icon-close"></i>
+                <i class="bi bi-chevron-right icon-open"></i>
+            </button>
             <div>
                 <div class="brand-container text-center my-3">
                     <h4 class="fw-extrabold text-primary mb-1" style="letter-spacing: 1.5px;">AJIS-PS</h4>
@@ -408,7 +429,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('kantin.menu') }}" class="nav-link">
-                            <i class="bi bi-shop"></i> Kasir Kantin
+                            <i class="bi bi-shop"></i> Menu Kantin
                         </a>
                     </li>
                     <li class="nav-item">
@@ -455,11 +476,13 @@
             
             <!-- HEADER UTAMA + JAM DIGITAL LIVE -->
             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-4 gap-3 p-3 glass-panel">
-                <div>
-                    <h5 class="m-0 fw-bold text-white d-flex align-items-center gap-2">
-                        <span>🖥️</span> DASHBOARD UTAMA MONITORING
-                    </h5>
-                    <small class="text-muted">Pantau status, sisa billing, dan kelola operasional rental secara real-time</small>
+                <div class="d-flex align-items-center gap-3">
+                    <div>
+                        <h5 class="m-0 fw-bold text-white d-flex align-items-center gap-2">
+                            <span>🖥️</span> DASHBOARD UTAMA MONITORING
+                        </h5>
+                        <small class="text-muted">Pantau status, sisa billing, dan kelola operasional rental secara real-time</small>
+                    </div>
                 </div>
                 <div class="d-flex align-items-center gap-3 w-100 w-sm-auto justify-content-between justify-content-sm-end flex-wrap">
                     <!-- Jam Digital Live Kasir -->
@@ -488,35 +511,38 @@
             <!-- 1. WIDGET RINGKASAN STATUS -->
             <div class="row g-3 mb-4">
                 <div class="col-md-4 col-sm-6">
-                    <div class="widget-card d-flex align-items-center gap-3">
-                        <div class="p-3 bg-primary bg-opacity-20 rounded-3 text-primary border border-primary border-opacity-20">
-                            <i class="bi bi-play-circle-fill fs-3"></i>
-                        </div>
+                    <div class="widget-card">
+                        <i class="bi bi-play-circle-fill text-primary position-absolute" style="top: 15px; right: 15px; opacity: 0.15; font-size: 2.8rem; pointer-events: none;"></i>
                         <div>
                             <small class="text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">TOTAL UNIT AKTIF</small>
-                            <h4 class="m-0 fw-bold text-white mt-1">{{ $consoles->where('status', 'aktif')->count() }} PS</h4>
+                            <div class="mt-2 d-flex align-items-baseline">
+                                <span class="fw-extrabold text-white" style="font-size: 3rem; line-height: 1;">{{ $consoles->where('status', 'aktif')->count() }}</span>
+                                <span class="text-muted ms-2" style="font-size: 1rem; font-weight: 500;">PS</span>
+                            </div>
                         </div>  
                     </div>  
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <div class="widget-card d-flex align-items-center gap-3">
-                        <div class="p-3 bg-success bg-opacity-20 rounded-3 text-success border border-success border-opacity-20">
-                            <i class="bi bi-check-circle-fill fs-3"></i>
-                        </div>
+                    <div class="widget-card">
+                        <i class="bi bi-check-circle-fill text-success position-absolute" style="top: 15px; right: 15px; opacity: 0.15; font-size: 2.8rem; pointer-events: none;"></i>
                         <div>
                             <small class="text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">KOSONG / TERSEDIA</small>
-                            <h4 class="m-0 fw-bold text-white mt-1">{{ $consoles->where('status', 'tersedia')->count() }} PS</h4>
+                            <div class="mt-2 d-flex align-items-baseline">
+                                <span class="fw-extrabold text-white" style="font-size: 3rem; line-height: 1;">{{ $consoles->where('status', 'tersedia')->count() }}</span>
+                                <span class="text-muted ms-2" style="font-size: 1rem; font-weight: 500;">PS</span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
-                    <div class="widget-card d-flex align-items-center gap-3">
-                        <div class="p-3 bg-warning bg-opacity-20 rounded-3 text-warning border border-warning border-opacity-20">
-                            <i class="bi bi-exclamation-octagon-fill fs-3"></i>
-                        </div>
+                    <div class="widget-card">
+                        <i class="bi bi-exclamation-octagon-fill text-warning position-absolute" style="top: 15px; right: 15px; opacity: 0.15; font-size: 2.8rem; pointer-events: none;"></i>
                         <div>
                             <small class="text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">MAINTENANCE / OFFLINE</small>
-                            <h4 class="m-0 fw-bold text-white mt-1">{{ $consoles->whereIn('status', ['rusak', 'offline'])->count() }} PS</h4>
+                            <div class="mt-2 d-flex align-items-baseline">
+                                <span class="fw-extrabold text-white" style="font-size: 3rem; line-height: 1;">{{ $consoles->whereIn('status', ['rusak', 'offline'])->count() }}</span>
+                                <span class="text-muted ms-2" style="font-size: 1rem; font-weight: 500;">PS</span>
+                            </div>
                         </div>
                     </div>
                 </div>
