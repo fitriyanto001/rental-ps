@@ -1,0 +1,258 @@
+/* custom.css - Global Stylesheet for AJIS-PS Management System (Midnight Forest Edition) */
+
+/* Theme Variables Override */
+:root {
+    --bg-primary: #050d0a !important;
+    --bg-surface: #0a1b15 !important;
+    --bg-card: rgba(13, 33, 26, 0.65) !important;
+    --border-glow: rgba(16, 185, 129, 0.1) !important;
+    --color-aktif: #10b981 !important; /* Mapped to Emerald Green */
+}
+
+/* Global Background and Ambient Glow Overrides */
+body {
+    background-color: var(--bg-primary) !important;
+    transition: background-color 0.3s ease;
+}
+
+.ambient-bg {
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(0,0,0,0) 70%) !important;
+}
+
+.ambient-bg-2 {
+    background: radial-gradient(circle, rgba(5, 150, 105, 0.04) 0%, rgba(0,0,0,0) 70%) !important;
+}
+
+/* Text and Icon Accent Overrides */
+.text-primary {
+    color: #34d399 !important;
+}
+
+.text-info {
+    color: #34d399 !important;
+}
+
+.brand-container h4 {
+    color: #10b981 !important;
+    background: linear-gradient(135deg, #34d399, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Buttons consistency & hover transitions */
+.btn {
+    border-radius: 12px !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25) !important;
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Primary Button Styling */
+.btn-primary {
+    background-color: #10b981 !important;
+    border-color: #10b981 !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover {
+    background-color: #059669 !important;
+    border-color: #059669 !important;
+}
+
+.btn-outline-primary {
+    color: #10b981 !important;
+    border-color: #10b981 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #10b981 !important;
+    color: #ffffff !important;
+}
+
+/* Sidebar navigation styling */
+.sidebar .nav-link {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.sidebar .nav-link.active {
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.02) 100%) !important;
+    color: #34d399 !important;
+    border-left: 3px solid #10b981 !important;
+}
+
+.sidebar .nav-link:hover {
+    color: #10b981 !important;
+}
+
+/* Base input and select fields */
+.form-control,
+.form-select,
+.form-control-dark,
+.form-select-dark {
+    border-radius: 12px !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.form-control-dark:focus,
+.form-select-dark:focus {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* Input group component styling */
+.input-group > .form-control,
+.input-group > .form-select,
+.input-group > .input-group-text,
+.input-group > .btn {
+    border-radius: 0 !important;
+}
+
+.input-group > :first-child,
+.input-group > .input-group-text:first-child,
+.input-group > .btn:first-child {
+    border-top-left-radius: 12px !important;
+    border-bottom-left-radius: 12px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.input-group > :last-child,
+.input-group > .input-group-text:last-child,
+.input-group > .btn:last-child {
+    border-top-right-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+/* Dark Modals */
+.modal-content-dark {
+    background-color: #091713 !important;
+    border: 1px solid rgba(16, 185, 129, 0.15) !important;
+}
+
+.modal-header-dark {
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1) !important;
+}
+
+.modal-footer-dark {
+    border-top: 1px solid rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Collapsible Sidebar Layout Settings */
+.sidebar {
+    position: relative !important;
+}
+
+/* Custom aesthetic sidebar toggle button styling */
+.sidebar-toggle-btn {
+    position: absolute !important;
+    top: 272px !important; /* Aligned with the "Laporan Kantin" menu item */
+    right: -15px !important; /* Floating right on the border edge */
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50% !important;
+    background: #10b981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    color: #ffffff !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    z-index: 1050 !important;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 0 !important;
+}
+
+.sidebar-toggle-btn:hover {
+    background: #059669 !important;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.6) !important;
+    transform: scale(1.1) !important;
+}
+
+.sidebar-toggle-btn:active {
+    transform: scale(0.9) !important;
+}
+
+/* Arrow Icon toggling based on collapsed state */
+.sidebar-toggle-btn .icon-open {
+    display: none !important;
+}
+.sidebar-toggle-btn .icon-close {
+    display: inline-block !important;
+}
+
+body.sidebar-collapsed .sidebar-toggle-btn .icon-open {
+    display: inline-block !important;
+}
+body.sidebar-collapsed .sidebar-toggle-btn .icon-close {
+    display: none !important;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    
+    .col-md-10 {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    body.sidebar-collapsed .sidebar {
+        margin-left: -16.666667% !important; /* Slide out standard 2/12 columns width */
+    }
+
+    body.sidebar-collapsed .col-md-10 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    body.sidebar-collapsed .sidebar-toggle-btn {
+        right: -30px !important; /* Stays visible at screen edge when collapsed */
+        background: rgba(16, 185, 129, 0.9) !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: fixed !important;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 260px !important;
+        max-width: 80% !important;
+        z-index: 1040 !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 5px 0 25px rgba(0,0,0,0.5) !important;
+    }
+
+    body:not(.sidebar-collapsed) .sidebar {
+        transform: translateX(0) !important;
+    }
+
+    body.sidebar-collapsed .sidebar {
+        transform: translateX(-100%) !important;
+    }
+
+    .sidebar-toggle-btn {
+        right: -30px !important;
+        background: rgba(16, 185, 129, 0.9) !important;
+    }
+
+    .col-md-10 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
